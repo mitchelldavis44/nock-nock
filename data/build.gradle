@@ -1,0 +1,37 @@
+apply from: '../dependencies.gradle'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+  compileSdkVersion versions.compileSdk
+
+  defaultConfig {
+    minSdkVersion versions.minSdk
+    targetSdkVersion versions.compileSdk
+    versionCode versions.publishVersionCode
+    versionName versions.publishVersion
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+
+  packagingOptions {
+    exclude 'META-INF/atomicfu.kotlin_module'
+  }
+}
+
+dependencies {
+  implementation project(':common')
+
+  implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin
+
+  api 'androidx.room:room-runtime:' + versions.room
+  kapt 'androidx.room:room-compiler:' + versions.room
+
+  androidTestImplementation 'androidx.test:runner:' + versions.androidxTestRunner
+  androidTestImplementation 'androidx.test:rules:' + versions.androidxTestRunner
+  androidTestImplementation 'androidx.test:core:' + versions.androidxTest
+  androidTestImplementation 'com.google.truth:truth:' + versions.truth
+}
+
+apply from: '../spotless.gradle'

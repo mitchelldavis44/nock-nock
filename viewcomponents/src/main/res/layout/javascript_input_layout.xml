@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="UnusedAttribute"
+    >
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fira_mono"
+        android:lineSpacingMultiplier="1.4"
+        android:singleLine="true"
+        android:text="@string/function_declaration"
+        android:textSize="@dimen/code_font_size"
+        />
+
+    <EditText
+        android:id="@+id/userInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:fontFamily="@font/fira_mono"
+        android:gravity="top"
+        android:inputType="textMultiLine|textNoSuggestions"
+        android:lineSpacingMultiplier="1.6"
+        android:paddingBottom="@dimen/content_inset_less"
+        android:paddingEnd="@dimen/content_inset_more"
+        android:paddingStart="@dimen/content_inset_more"
+        android:paddingTop="@dimen/content_inset_less"
+        android:scrollHorizontally="true"
+        android:text="@string/default_js"
+        android:textSize="@dimen/code_font_size"
+        tools:ignore="Autofill,LabelFor,RtlSymmetry"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fira_mono"
+        android:text="@string/function_end"
+        android:textSize="@dimen/code_font_size"
+        />
+
+    <TextView
+        android:id="@+id/error_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_inset_less"
+        android:visibility="gone"
+        tools:text="Please enter some JavaScript!"
+        tools:visibility="visible"
+        style="@style/NockText.Error"
+        />
+
+  </LinearLayout>
+
+</merge>

@@ -1,0 +1,44 @@
+apply from: '../dependencies.gradle'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+  compileSdkVersion versions.compileSdk
+
+  defaultConfig {
+    minSdkVersion versions.minSdk
+    targetSdkVersion versions.compileSdk
+    versionCode versions.publishVersionCode
+    versionName versions.publishVersion
+  }
+
+  packagingOptions {
+    exclude 'META-INF/atomicfu.kotlin_module'
+  }
+
+  // For Mozilla Rhino
+  lintOptions {
+    abortOnError false
+  }
+}
+
+dependencies {
+  implementation 'androidx.annotation:annotation:' + versions.androidxAnnotations
+  api 'androidx.lifecycle:lifecycle-extensions:' + versions.lifecycle
+
+  implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin
+  api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:' + versions.coroutines
+  api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + versions.coroutines
+
+  implementation 'org.koin:koin-android:' + versions.koin
+  implementation 'org.mozilla:rhino:' + versions.rhino
+
+  api 'com.afollestad:rxkprefs:' + versions.rxkPrefs
+  api "io.reactivex.rxjava2:rxjava:" + versions.rxJava
+
+  testImplementation 'junit:junit:' + versions.junit
+  testImplementation 'com.google.truth:truth:' + versions.truth
+  testImplementation 'androidx.arch.core:core-testing:' + versions.archTesting
+}
+
+apply from: '../spotless.gradle'

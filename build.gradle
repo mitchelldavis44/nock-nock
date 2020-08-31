@@ -1,23 +1,32 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: './dependencies.gradle'
+apply from: './versionsPlugin.gradle'
 
 buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.2'
+  apply from: './dependencies.gradle'
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
+  repositories {
+    google()
+    jcenter()
+    maven { url 'https://maven.fabric.io/public' }
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:' + versions.gradlePlugin
+    classpath 'com.diffplug.spotless:spotless-plugin-gradle:' + versions.spotlessPlugin
+    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:' + versions.kotlin
+    classpath 'com.github.ben-manes:gradle-versions-plugin:' + versions.versionPlugin
+    classpath 'io.fabric.tools:gradle:' + versions.fabricPlugin
+    classpath 'com.google.gms:google-services:' + versions.googleServices
+  }
 }
 
 allprojects {
-    repositories {
-        jcenter()
-    }
-}
+  repositories {
+    google()
+    jcenter()
+    maven { url "https://jitpack.io" }
+  }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+  tasks.withType(Javadoc).all {
+    enabled = false
+  }
 }

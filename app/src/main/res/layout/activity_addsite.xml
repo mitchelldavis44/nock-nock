@@ -1,127 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?colorPrimary"
-    android:orientation="vertical">
+    >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/ic_action_close"
-        app:title="@string/add_site"
-        app:titleTextColor="?android:textColorPrimary" />
+  <LinearLayout
+      android:id="@+id/rootView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      >
+
+    <include layout="@layout/include_app_bar"/>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:paddingBottom="@dimen/content_inset_double"
+          android:paddingLeft="@dimen/content_inset"
+          android:paddingRight="@dimen/content_inset"
+          android:paddingTop="@dimen/content_inset_half"
+          >
+
+        <TextView
+            android:layout_marginTop="0dp"
+            android:text="@string/site_name"
+            style="@style/InputForm.Header"
+            />
+
+        <EditText
+            android:id="@+id/inputName"
+            android:hint="@string/site_name_hint"
+            android:inputType="textPersonName|textCapWords|textAutoCorrect"
+            android:nextFocusDown="@+id/inputUrl"
+            tools:ignore="Autofill"
+            style="@style/InputForm.Field"
+            />
+
+        <TextView
+            android:text="@string/site_url"
+            style="@style/InputForm.Header"
+            />
+
+        <EditText
+            android:id="@+id/inputUrl"
+            android:hint="@string/site_url_hint"
+            android:inputType="textUri"
+            android:nextFocusDown="@+id/inputTags"
+            tools:ignore="Autofill"
+            style="@style/InputForm.Field"
+            />
+
+        <TextView
+            android:id="@+id/textUrlWarning"
+            android:text="@string/warning_http_url"
+            android:visibility="gone"
+            style="@style/InputForm.FieldNote"
+            />
+
+        <TextView
+            android:text="@string/site_tags"
+            style="@style/InputForm.Header"
+            />
+
+        <EditText
+            android:id="@+id/inputTags"
+            android:digits=",.?-_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+            android:hint="@string/site_tags_hint"
+            android:inputType="text|textCapWords"
+            android:nextFocusDown="@+id/inputUrl"
+            tools:ignore="Autofill"
+            style="@style/InputForm.Field"
+            />
+
+        <include layout="@layout/include_divider"/>
+
+        <com.afollestad.nocknock.viewcomponents.interval.ValidationIntervalLayout
+            android:id="@+id/checkIntervalLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/content_inset"
+            />
+
+        <TextView
+            android:id="@+id/responseValidationLabel"
+            android:text="@string/response_validation_mode"
+            style="@style/InputForm.Header"
+            />
+
+        <Spinner
+            android:id="@+id/responseValidationMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <EditText
+            android:id="@+id/responseValidationSearchTerm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/content_inset_less"
+            android:layout_marginLeft="-4dp"
+            android:layout_marginRight="-4dp"
+            android:layout_marginTop="-4dp"
+            android:hint="@string/search_term"
+            android:visibility="gone"
+            tools:ignore="Autofill,TextFields"
+            style="@style/NockText.Body"
+            />
+
+        <com.afollestad.nocknock.viewcomponents.js.JavaScriptInputLayout
+            android:id="@+id/scriptInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/content_inset"
+            android:layout_marginTop="@dimen/content_inset_half"
+            android:background="?scriptLayoutBackground"
+            />
+
+        <TextView
+            android:id="@+id/validationModeDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/content_inset_half"
+            android:lineSpacingMultiplier="1.2"
+            android:text="@string/validation_mode_status_desc"
+            style="@style/NockText.Body.Light"
+            />
+
+        <include layout="@layout/include_divider"/>
+
+        <com.afollestad.nocknock.viewcomponents.retrypolicy.RetryPolicyLayout
+            android:id="@+id/retryPolicyLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/content_inset_more"
+            />
+
+        <TextView
+            android:layout_marginTop="@dimen/content_inset"
+            android:text="@string/response_timeout"
+            style="@style/InputForm.Header"
+            />
+
+        <EditText
+            android:id="@+id/responseTimeoutInput"
+            android:hint="@string/response_timeout_default"
+            android:inputType="number"
+            android:maxLength="8"
+            tools:ignore="Autofill"
+            style="@style/InputForm.Field"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/content_inset"
+            android:text="@string/ssl_certificate"
+            style="@style/NockText.SectionHeader"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/content_inset"
-            android:paddingLeft="@dimen/content_inset"
-            android:paddingRight="@dimen/content_inset"
-            android:paddingTop="@dimen/content_inset_less">
+            android:orientation="horizontal"
+            >
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="-4dp"
-                android:layout_marginRight="-4dp"
-                android:layout_marginTop="@dimen/content_inset">
+          <EditText
+              android:id="@+id/sslCertificateInput"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_gravity="start|center_vertical"
+              android:layout_marginStart="-4dp"
+              android:layout_weight="1"
+              android:hint="@string/ssl_certificate_automatic"
+              android:inputType="textUri"
+              tools:ignore="Autofill,HardcodedText,LabelFor"
+              style="@style/NockText.Body"
+              />
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/inputName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:hint="@string/site_name"
-                    android:inputType="textPersonName|textCapWords|textAutoCorrect"
-                    android:textColor="?android:textColorPrimary"
-                    android:textColorHint="?android:textColorSecondary"
-                    android:textSize="@dimen/body_font_size" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="-4dp"
-                android:layout_marginRight="-4dp"
-                android:layout_marginTop="@dimen/content_inset_half">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/inputUrl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:hint="@string/site_url"
-                    android:inputType="textUri"
-                    android:textColor="?android:textColorPrimary"
-                    android:textColorHint="?android:textColorSecondary"
-                    android:textSize="@dimen/body_font_size" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <TextView
-                android:id="@+id/checkIntervalLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/list_text_spacing"
-                android:layout_marginTop="@dimen/content_inset_more"
-                android:fontFamily="sans-serif"
-                android:text="@string/check_interval"
-                android:textColor="?colorAccent"
-                android:textSize="@dimen/caption_font_size" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <EditText
-                    android:id="@+id/checkIntervalInput"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"
-                    android:layout_marginEnd="@dimen/content_inset_half"
-                    android:layout_marginStart="-4dp"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-light"
-                    android:hint="0"
-                    android:inputType="number"
-                    android:textSize="@dimen/body_font_size"
-                    tools:ignore="HardcodedText,LabelFor" />
-
-                <Spinner
-                    android:id="@+id/checkIntervalSpinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginEnd="-4dp"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/doneBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="-4dp"
-                android:layout_marginRight="-4dp"
-                android:layout_marginTop="@dimen/content_inset"
-                android:text="@string/done"
-                android:textColor="#fff" />
+          <Button
+              android:id="@+id/sslCertificateBrowse"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="end|center_vertical"
+              android:text="@string/ssl_certificate_browse"
+              style="@style/AccentTextButton"
+              />
 
         </LinearLayout>
 
+        <include layout="@layout/include_divider"/>
+
+        <com.afollestad.nocknock.viewcomponents.headers.HeaderStackLayout
+            android:id="@+id/headersLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/content_inset_half"
+            />
+
+      </LinearLayout>
+
     </ScrollView>
 
-</LinearLayout>
+  </LinearLayout>
+
+  <com.afollestad.nocknock.viewcomponents.LoadingIndicatorFrame
+      android:id="@+id/loadingProgress"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      />
+
+</FrameLayout>
